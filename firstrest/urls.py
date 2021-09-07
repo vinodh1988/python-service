@@ -1,7 +1,7 @@
 
 from django.urls import path
-from firstrest.views import getAll
+from firstrest.apis.views import products
 
 urlpatterns = [
-    path('all/',getAll,name="product-list")
+    path('',products,name="product-list")
 ]
