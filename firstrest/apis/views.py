@@ -27,7 +27,30 @@ class  ProductsAPI(APIView):
             return Response(item.data)
         else:
             return Response(item.errors)
+
+    def put(self,request,pk):
         
+        try:
+            item=Product.objects.get(pk=pk)
+            serialized=ProductSerializer(item,data=request.data)
+            if serialized.is_valid():
+                serialized.save()
+                return Response(serialized.data) 
+        except Product.DoesNotExist:
+            return Response({'error':'No Content'}, status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(item.errors)
+    
+    def delete(self,request,pk):
+        try:
+            item=Product.objects.get(pk=pk)
+            item.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Product.DoesNotExist:
+            return Response({'error':'No Record Exist'}, status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(item.errors)
+    
 
 # @api_view(['GET','POST'])
 # def products(request):
