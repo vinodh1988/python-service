@@ -22,11 +22,14 @@ class  ProductsAPI(APIView):
     
     def post(self,request):
         item=ProductSerializer(data=request.data)
-        if item.is_valid():
-            item.save()
-            return Response(item.data)
-        else:
-            return Response(item.errors)
+        try:
+            if item.is_valid():
+                item.save()
+                return Response(item.data)
+            else:
+                return Response(item.errors,status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except:
+            return Response(item.errors,status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def put(self,request,pk):
         
