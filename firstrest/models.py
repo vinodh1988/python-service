@@ -16,7 +16,7 @@ class Product(models.Model):
     name=models.CharField(max_length=30,null=False)
     price=models.FloatField(null=False)
     type=models.CharField(null=False,max_length=30)
-    supplier=models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    supplier=models.ForeignKey(Supplier, on_delete=models.CASCADE,related_name="products")
     def __str__(self):
         return self.name
 

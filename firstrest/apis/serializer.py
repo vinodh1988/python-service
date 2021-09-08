@@ -30,8 +30,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SupplierSerializer(serializers.ModelSerializer):
-    products=ProductSerializer(many=True, read_only=True)
+    products=ProductSerializer(many=True,read_only=True)
     class Meta:
         model= Supplier
-        fields= ['name','city','address','products']
+        fields= "__all__"
     

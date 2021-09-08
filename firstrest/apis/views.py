@@ -59,7 +59,7 @@ class  SuppliersAPI(APIView):
     def get(self,request,pk=None):
         if(pk==None):
             supplierlist=Supplier.objects.all()
-            result=SupplierSerializer(supplierlist,many=True)
+            result=SupplierSerializer(supplierlist,many=True,context={'request':request})
             return Response(result.data)
         else:
             try:
