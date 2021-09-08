@@ -12,6 +12,7 @@ from firstrest.models import Product,Supplier
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    supplier = serializers.CharField(source='supplier.name')
     class Meta:
         model= Product
         fields = "__all__" 
