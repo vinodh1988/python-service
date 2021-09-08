@@ -1,5 +1,6 @@
+from django.db.models import fields
 from rest_framework import serializers
-from firstrest.models import Product
+from firstrest.models import Product,Supplier
 # class ProductSerializer(serializers.Serializer):
 #     productid=serializers.IntegerField()
 #     name=serializers.CharField()
@@ -8,6 +9,7 @@ from firstrest.models import Product
 
 #     def create(self, data):
 #         return Product.objects.create(**data)
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,4 +27,11 @@ class ProductSerializer(serializers.ModelSerializer):
             return value
         else:
             raise serializers.ValidationError("Type value is not correct")
+
+
+class SupplierSerializer(serializers.ModelSerializer):
+    products=ProductSerializer(many=True, read_only=True)
+    class Meta:
+        model= Supplier
+        fields= ['name','city','address','products']
     

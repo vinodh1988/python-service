@@ -5,6 +5,7 @@ class Supplier(models.Model):
     name=models.CharField(max_length=30,null=False)
     city=models.CharField(max_length=30,null=False)
     address=models.CharField(max_length=60,null=False)
+    
 
     def __str__(self):
         return self.name

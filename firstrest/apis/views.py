@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from firstrest.models import Product
+from firstrest.models import Product,Supplier
 from rest_framework.decorators import api_view,APIView
 from rest_framework.response import Response
-from firstrest.apis.serializer import ProductSerializer
+from firstrest.apis.serializer import ProductSerializer,SupplierSerializer
 from rest_framework import status
 
 class  ProductsAPI(APIView):
@@ -54,6 +54,20 @@ class  ProductsAPI(APIView):
         except:
             return Response(item.errors)
     
+class  SuppliersAPI(APIView):
+
+    def get(self,request,pk=None):
+        if(pk==None):
+            supplierlist=Supplier.objects.all()
+            result=SupplierSerializer(supplierlist,many=True)
+            return Response(result.data)
+        else:
+            try:
+                item=Supplier.objects.get(pk=pk)
+                return Response(SupplierSerializer(item).data)
+            except Supplier.DoesNotExist:
+                return Response({'error':'No Content'}, status=status.HTTP_204_NO_CONTENT)
+
 
 # @api_view(['GET','POST'])
 # def products(request):
