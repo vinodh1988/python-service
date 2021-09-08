@@ -32,6 +32,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class SupplierSerializer(serializers.ModelSerializer):
     products=ProductSerializer(many=True,read_only=True)
+    #products = serializers.StringRelatedField(many=True)
+    # products = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     view_name='product-by-id'
+    # )
     class Meta:
         model= Supplier
         fields= "__all__"
