@@ -5,7 +5,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from firstrest.apis.pagination import ProductSetPagination,CursorPagination
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from rest_framework.permissions import IsAuthenticated
 class ProductGAPI(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #filter_backends = [DjangoFilterBackend]
