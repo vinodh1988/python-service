@@ -8,9 +8,10 @@ class ProductGAPI(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #filter_backends = [DjangoFilterBackend]
-    filter_backends=[DjangoFilterBackend,filters.SearchFilter]
+    filter_backends=[DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     filterset_fields = ['name', 'type']
     search_fields=['name','type']  
+    ordering_fields=['name','type','price']
     # def get_queryset(self): 
     #     #searchtype = self.kwargs['type']
     #     #searchtype=self.request.query_params.get('type')
