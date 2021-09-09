@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from firstrest.apis.serializer import ProductSerializer,SupplierSerializer
 from rest_framework import status
 
-class  ProductsAPI(APIView):
 
+class  ProductsAPI(APIView):
+    #throttle_scope = 'product'
     def get(self,request,pk=None):
         if(pk==None):
             productlist=Product.objects.all()

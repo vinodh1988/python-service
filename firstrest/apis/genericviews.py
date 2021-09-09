@@ -4,15 +4,16 @@ from firstrest.models import Product
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from firstrest.apis.pagination import ProductSetPagination,CursorPagination
-
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 class ProductGAPI(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #filter_backends = [DjangoFilterBackend]
-    filter_backends=[DjangoFilterBackend,filters.SearchFilter]#filters.OrderingFilter]
+    #throttle_classes = [UserRateThrottle,AnonRateThrottle]
+    filter_backends=[DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     filterset_fields = ['name', 'type']
     search_fields=['name','type']
-    pagination_class=  CursorPagination
+    pagination_class=  ProductSetPagination
     ordering_fields=['name','type','price']
     # def get_queryset(self): 
     #     #searchtype = self.kwargs['type']

@@ -136,4 +136,13 @@ REST_FRAMEWORK = {
     #'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
     #'PAGE_SIZE': 5
-}
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'product': '5/day', 
+        'anon': '2/day',
+        'user': '10/day'
+    }
+    }
+    
