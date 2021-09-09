@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'firstrest',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters'
 ]
 
@@ -143,6 +144,10 @@ REST_FRAMEWORK = {
         'product': '5/day', 
         'anon': '2/day',
         'user': '10/day'
-    }
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+         #'rest_framework.authentication.BasicAuthentication',
+         'rest_framework.authentication.TokenAuthentication',
+     ]  
     }
     
